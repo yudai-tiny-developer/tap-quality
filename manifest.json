@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Playback Quality Control for Touch Devices",
+  "version": "1.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "inject.js",
+        "common.js",
+        "settings.js",
+        "progress.js"
+      ],
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage"
+  ]
+}
