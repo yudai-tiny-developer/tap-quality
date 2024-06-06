@@ -23,22 +23,22 @@ function main(common, settings, progress, data) {
 
     {
         const row = settings.createRow(row_class);
-        row.appendChild(settings.createLabel(cell_class, common.value(data.v1, common.default_v1)));
+        row.appendChild(settings.createLabel(cell_class, common.value(data.v1, common.default_v1) + ' (144p)'));
         row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v1_enabled', data.v1_enabled, common.default_v1_enabled, common.value));
         container.appendChild(row);
     } {
         const row = settings.createRow(row_class);
-        row.appendChild(settings.createLabel(cell_class, common.value(data.v2, common.default_v2)));
+        row.appendChild(settings.createLabel(cell_class, common.value(data.v2, common.default_v2) + ' (240p)'));
         row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v2_enabled', data.v2_enabled, common.default_v2_enabled, common.value));
         container.appendChild(row);
     } {
         const row = settings.createRow(row_class);
-        row.appendChild(settings.createLabel(cell_class, common.value(data.v3, common.default_v3)));
+        row.appendChild(settings.createLabel(cell_class, common.value(data.v3, common.default_v3) + ' (360p)'));
         row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v3_enabled', data.v3_enabled, common.default_v3_enabled, common.value));
         container.appendChild(row);
     } {
         const row = settings.createRow(row_class);
-        row.appendChild(settings.createLabel(cell_class, common.value(data.v4, common.default_v4)));
+        row.appendChild(settings.createLabel(cell_class, common.value(data.v4, common.default_v4) + ' (480p)'));
         row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v4_enabled', data.v4_enabled, common.default_v4_enabled, common.value));
         container.appendChild(row);
     } {
