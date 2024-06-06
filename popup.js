@@ -58,6 +58,11 @@ function main(common, settings, progress, data) {
         container.appendChild(row);
     } {
         const row = settings.createRow(row_class);
+        row.appendChild(settings.createLabel(cell_class, common.value(data.v9, common.default_v9)));
+        row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v9_enabled', data.v9_enabled, common.default_v9_enabled, common.value));
+        container.appendChild(row);
+    } {
+        const row = settings.createRow(row_class);
         row.appendChild(settings.createLabel(cell_class, common.value(data.v8, common.default_v8)));
         row.appendChild(settings.createToggle(cell_class, toggle_class, label_class, 'v8_enabled', data.v8_enabled, common.default_v8_enabled, common.value));
         container.appendChild(row);
