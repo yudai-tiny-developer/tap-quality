@@ -20,7 +20,7 @@ function main(common) {
     }
 
     chrome.storage.onChanged.addListener(() => {
-        document.querySelectorAll('span._tap_quality_button').forEach(b => b.remove());
+        document.querySelectorAll('button._tap_quality_button').forEach(b => b.remove());
         apply_settings(true);
     });
 
@@ -43,13 +43,14 @@ function main(common) {
             if (common.value(data.v5_enabled, common.default_v5_enabled)) { create_button(common.value(data.v5, common.default_v5), area, panel); }
             if (common.value(data.v6_enabled, common.default_v6_enabled)) { create_button(common.value(data.v6, common.default_v6), area, panel); }
             if (common.value(data.v7_enabled, common.default_v7_enabled)) { create_button(common.value(data.v7, common.default_v7), area, panel); }
+            if (common.value(data.v8_enabled, common.default_v8_enabled)) { create_button(common.value(data.v8, common.default_v8), area, panel); }
         }
     }
 
     function create_button(value, area, panel) {
         const button = document.createElement('button');
         button.title = value;
-        button.innerText = button.title;
+        button.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 72 72"><text font-size="20" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff">${button.title}</text></svg>`;
         button.classList.add('_tap_quality_button', 'ytp-button');
         button.setAttribute('tabindex', '-1');
         button.addEventListener('click', () => {
@@ -57,11 +58,7 @@ function main(common) {
             button.blur();
         });
 
-        const span = document.createElement('span');
-        span.classList.add('_tap_quality_button', 'ytp-button');
-        span.appendChild(button);
-
-        area.insertBefore(span, panel);
+        area.insertBefore(button, panel);
     }
 
     const s = document.createElement('script');
