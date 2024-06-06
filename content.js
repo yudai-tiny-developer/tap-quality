@@ -41,7 +41,7 @@ function main(common) {
             if (common.value(data.v3_enabled, common.default_v3_enabled)) { create_button(common.value(data.v3, common.default_v3), area, panel, '360p'); }
             if (common.value(data.v4_enabled, common.default_v4_enabled)) { create_button(common.value(data.v4, common.default_v4), area, panel, '480p'); }
             if (common.value(data.v5_enabled, common.default_v5_enabled)) { create_button(common.value(data.v5, common.default_v5), area, panel, '720p'); }
-            if (common.value(data.v6_enabled, common.default_v6_enabled)) { create_button(common.value(data.v6, common.default_v6), area, panel, '10800p'); }
+            if (common.value(data.v6_enabled, common.default_v6_enabled)) { create_button(common.value(data.v6, common.default_v6), area, panel, '1080p'); }
             if (common.value(data.v7_enabled, common.default_v7_enabled)) { create_button(common.value(data.v7, common.default_v7), area, panel, '1440p'); }
             if (common.value(data.v9_enabled, common.default_v9_enabled)) { create_button(common.value(data.v9, common.default_v9), area, panel, '2160p'); }
 
