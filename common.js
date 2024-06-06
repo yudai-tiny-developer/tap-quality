@@ -7,16 +7,18 @@ export const storage = [
     'v6', 'v6_enabled',
     'v7', 'v7_enabled',
     'v8', 'v8_enabled',
+    'v9', 'v9_enabled',
 ];
 
-export const default_v1 = 'tiny'; // 144
-export const default_v2 = 'small'; // 240
-export const default_v3 = 'medium'; // 360
-export const default_v4 = 'large'; // 480
-export const default_v5 = 'hd720'; // 720
-export const default_v6 = 'hd1080'; // 1080
-export const default_v7 = 'highres';
+export const default_v1 = 'tiny'; // 144p
+export const default_v2 = 'small'; // 240p
+export const default_v3 = 'medium'; // 360p
+export const default_v4 = 'large'; // 480p
+export const default_v5 = 'hd720'; // 720p
+export const default_v6 = 'hd1080'; // 1080p
+export const default_v7 = 'hd1440'; // 1440p
 export const default_v8 = 'auto';
+export const default_v9 = 'hd2160'; // 2160p
 
 export const default_v1_enabled = true;
 export const default_v2_enabled = false;
@@ -26,6 +28,7 @@ export const default_v5_enabled = false;
 export const default_v6_enabled = true;
 export const default_v7_enabled = false;
 export const default_v8_enabled = false;
+export const default_v9_enabled = false;
 
 export function value(value, defaultValue) {
     return value === undefined ? defaultValue : value;
