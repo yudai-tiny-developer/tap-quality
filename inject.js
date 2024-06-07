@@ -29,6 +29,7 @@ document.addEventListener('_tap_quality', e => {
 
 document.addEventListener('_tap_quality_init', e => {
     const player = document.body.querySelector('div#movie_player');
+    _tap_quality_activate(player.getPlaybackQuality());
     player.addEventListener('onPlaybackQualityChange', value => {
         _tap_quality_activate(value);
     });
