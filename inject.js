@@ -12,27 +12,33 @@ function _tap_quality_update_class(remove_class, add_target_class, add_value) {
     }
 }
 
-function _tap_quality_activate(value) {
-    _tap_quality_update_class('_tap_quality_active', '_tap_quality_button_' + value, '_tap_quality_active');
-}
+function _tap_quality_activate(playback_quality, preferred_quality) {
+    _tap_quality_update_class('_tap_quality_active', '_tap_quality_button_' + playback_quality, '_tap_quality_active');
 
-function _tap_quality_onChange(e) {
-    _tap_quality_activate(e);
+    if (preferred_quality === 'auto') {
+        _tap_quality_update_class(undefined, '_tap_quality_button_auto', '_tap_quality_active');
+    }
 }
 
 let _tap_quality_init = true;
 
 document.addEventListener('_tap_quality_init', e => {
     const player = document.body.querySelector('div#movie_player');
-    _tap_quality_activate(player.getPlaybackQuality());
-    if (_tap_quality_init) {
-        _tap_quality_init = false;
-        player.addEventListener('onPlaybackQualityChange', _tap_quality_onChange);
+    if (player) {
+        _tap_quality_activate(player.getPlaybackQuality(), player.getPreferredQuality());
+        if (_tap_quality_init) {
+            _tap_quality_init = false;
+            player.addEventListener('onPlaybackQualityChange', e => {
+                _tap_quality_activate(e, player.getPreferredQuality());
+            });
+        }
     }
 });
 
 document.addEventListener('_tap_quality', e => {
     _tap_quality_update_class('_tap_quality_tap', '_tap_quality_button_' + e.detail, '_tap_quality_tap');
     const player = document.body.querySelector('div#movie_player');
-    player.setPlaybackQualityRange(e.detail);
+    if (player) {
+        player.setPlaybackQualityRange(e.detail);
+    }
 });
