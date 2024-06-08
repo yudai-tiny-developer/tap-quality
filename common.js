@@ -17,18 +17,18 @@ export const default_v4 = 'large'; // 480p
 export const default_v5 = 'hd720'; // 720p
 export const default_v6 = 'hd1080'; // 1080p
 export const default_v7 = 'hd1440'; // 1440p
-export const default_v8 = 'auto';
+export const default_v8 = 'auto'; // auto
 export const default_v9 = 'hd2160'; // 2160p
 
-export const default_v1_enabled = true;
-export const default_v2_enabled = false;
-export const default_v3_enabled = false;
-export const default_v4_enabled = true;
-export const default_v5_enabled = false;
-export const default_v6_enabled = true;
-export const default_v7_enabled = false;
-export const default_v8_enabled = false;
-export const default_v9_enabled = false;
+export const default_v1_enabled = true; // 144p
+export const default_v2_enabled = false; // 240p
+export const default_v3_enabled = true; // 360p
+export const default_v4_enabled = false; // 480p
+export const default_v5_enabled = false; // 720p
+export const default_v6_enabled = true; // 1080p
+export const default_v7_enabled = false; // 1440p
+export const default_v8_enabled = false; // auto
+export const default_v9_enabled = false; // 2160p
 
 export function value(value, defaultValue) {
     return value === undefined ? defaultValue : value;
