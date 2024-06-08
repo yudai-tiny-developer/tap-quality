@@ -20,13 +20,13 @@ function _tap_quality_onChange(e) {
     _tap_quality_activate(e);
 }
 
-let _tap_quality_uninit = true;
+let _tap_quality_init = true;
 
 document.addEventListener('_tap_quality_init', e => {
     const player = document.body.querySelector('div#movie_player');
     _tap_quality_activate(player.getPlaybackQuality());
-    if (_tap_quality_uninit) {
-        _tap_quality_uninit = false;
+    if (_tap_quality_init) {
+        _tap_quality_init = false;
         player.addEventListener('onPlaybackQualityChange', _tap_quality_onChange);
     }
 });
