@@ -3,8 +3,6 @@ import(chrome.runtime.getURL('common.js')).then(common =>
 );
 
 function main(common) {
-    let init = true;
-
     new MutationObserver((mutations, observer) => {
         for (const m of mutations) {
             if (m.target.nodeName === 'DIV' && m.target.id === 'container' && m.target.classList.contains('ytd-player')) {
@@ -29,13 +27,7 @@ function main(common) {
     function apply_settings(force = false) {
         chrome.storage.local.get(common.storage, data => {
             create_buttons(data, force);
-
-            if (init) {
-                init = false;
-                document.dispatchEvent(new CustomEvent('_tap_quality_init'));
-            } else {
-                document.dispatchEvent(new CustomEvent('_tap_quality_update'));
-            }
+            document.dispatchEvent(new CustomEvent('_tap_quality_init'));
         });
     }
 
