@@ -30,4 +30,7 @@ document.addEventListener('_tap_quality', e => {
     _tap_quality_update_class('_tap_quality_tap', '_tap_quality_button_' + e.detail, '_tap_quality_tap');
     const player = document.body.querySelector('div#movie_player');
     player.setPlaybackQualityRange(e.detail, e.detail);
+
+    const playback_quality = player.getPlaybackQuality();
+    player.setPlaybackQualityRange(playback_quality, playback_quality);
 });
