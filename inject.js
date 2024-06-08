@@ -20,10 +20,15 @@ function _tap_quality_onChange(e) {
     _tap_quality_activate(e);
 }
 
+let _tap_quality_uninit = true;
+
 document.addEventListener('_tap_quality_init', e => {
     const player = document.body.querySelector('div#movie_player');
     _tap_quality_activate(player.getPlaybackQuality());
-    player.addEventListener('onPlaybackQualityChange', _tap_quality_onChange);
+    if (_tap_quality_uninit) {
+        _tap_quality_uninit = false;
+        player.addEventListener('onPlaybackQualityChange', _tap_quality_onChange);
+    }
 });
 
 document.addEventListener('_tap_quality', e => {
