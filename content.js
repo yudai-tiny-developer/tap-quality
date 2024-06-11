@@ -1,26 +1,20 @@
-import(chrome.runtime.getURL('common.js')).then(common =>
-    main(common)
-);
+const app = document.querySelector('ytd-app');
+if (app) {
+    import(chrome.runtime.getURL('common.js')).then(common => {
+        main(common);
+    });
+}
 
 function main(common) {
     new MutationObserver((mutations, observer) => {
-        for (const m of mutations) {
-            if (m.target.nodeName === 'DIV' && m.target.id === 'container' && m.target.classList.contains('ytd-player')) {
-                apply_settings();
-                return;
-            }
+        if (app.querySelector('div.ytp-right-controls')) {
+            observer.disconnect();
+            apply_settings();
         }
-    }).observe(document, {
-        childList: true,
-        subtree: true,
-    });
-
-    if (document.body.querySelector('div#container.ytd-player')) {
-        apply_settings();
-    }
+    }).observe(app, { childList: true, subtree: true });
 
     chrome.storage.onChanged.addListener(() => {
-        document.body.querySelectorAll('button._tap_quality_button').forEach(b => b.remove());
+        app.querySelectorAll('button._tap_quality_button').forEach(b => b.remove());
         apply_settings(true);
     });
 
@@ -32,7 +26,7 @@ function main(common) {
     }
 
     function create_buttons(data, force) {
-        const area = document.body.querySelector('div.ytp-right-controls');
+        const area = app.querySelector('div.ytp-right-controls');
         if (area && (force || !area.getAttribute('_tap_quality'))) {
             area.setAttribute('_tap_quality', true);
             const panel = area.querySelector('button.ytp-settings-button');
