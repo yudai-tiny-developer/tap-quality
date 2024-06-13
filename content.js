@@ -39,21 +39,17 @@ function main(common) {
             if (common.value(data.v7_enabled, common.default_v7_enabled)) { create_button(common.value(data.v7, common.default_v7), area, panel, '1440p'); }
             if (common.value(data.v9_enabled, common.default_v9_enabled)) { create_button(common.value(data.v9, common.default_v9), area, panel, '2160p'); }
 
-            if (common.value(data.v8_enabled, common.default_v8_enabled)) { create_button(common.value(data.v8, common.default_v8), area, panel); }
+            if (common.value(data.v8_enabled, common.default_v8_enabled)) { create_button(common.value(data.v8, common.default_v8), area, panel, 'auto'); }
         }
     }
 
     function create_button(value, area, panel, label) {
         const button = document.createElement('button');
-        button.title = label ?? value;
-        button.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 72 72"><text font-size="20" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">${button.title}</text></svg>`;
+        button.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 72 72"><text font-size="20" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">${label}</text></svg>`;
         button.classList.add('_tap_quality_button', '_tap_quality_button_' + value, 'ytp-button');
-        button.setAttribute('tabindex', '-1');
         button.addEventListener('click', () => {
             document.dispatchEvent(new CustomEvent('_tap_quality', { detail: value }));
-            button.blur();
         });
-
         area.insertBefore(button, panel);
     }
 
