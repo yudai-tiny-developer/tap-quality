@@ -49,6 +49,7 @@ function main(common) {
         button.classList.add('_tap_quality_button', '_tap_quality_button_' + value, 'ytp-button');
         button.addEventListener('click', () => {
             document.dispatchEvent(new CustomEvent('_tap_quality', { detail: value }));
+            button.blur();
         });
         area.insertBefore(button, panel);
     }
