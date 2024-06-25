@@ -1,8 +1,9 @@
 button._tap_quality_button {
-    fill: white !important;
+    color: var(--yt-spec-text-primary) !important;
+    text-align: center !important;
 }
 
 button._tap_quality_button._tap_quality_active {
-    fill: #ff8983 !important;
+    color: var(--yt-spec-red-30) !important;
     font-weight: bold !important;
 }
