@@ -42,9 +42,9 @@ function main(app, common) {
         area.insertBefore(button, panel);
     }
 
-    document.addEventListener('_tap_volume_init', e => {
+    document.addEventListener('_tap_quality_init', e => {
         new MutationObserver((mutations, observer) => {
-            if (app.querySelector('span.ytp-volume-area')) {
+            if (app.querySelector('div.ytp-right-controls')) {
                 observer.disconnect();
                 loadSettings();
             }
