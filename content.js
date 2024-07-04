@@ -1,12 +1,10 @@
-const app = document.querySelector('ytd-app') ?? document.body;
+import(chrome.runtime.getURL('common.js')).then(common => {
+    if (!common.isLiveChat(location.href)) {
+        main(document.querySelector('ytd-app') ?? document.body, common);
+    }
+});
 
-if (!window.location.href.startsWith('https://www.youtube.com/live_chat?')) {
-    import(chrome.runtime.getURL('common.js')).then(common => {
-        main(common);
-    });
-}
-
-function main(common) {
+function main(app, common) {
     function loadSettings() {
         chrome.storage.local.get(common.storage, data => {
             create_buttons(data);
@@ -44,9 +42,9 @@ function main(common) {
         area.insertBefore(button, panel);
     }
 
-    document.addEventListener('_tap_volume_init', e => {
+    document.addEventListener('_tap_quality_init', e => {
         new MutationObserver((mutations, observer) => {
-            if (app.querySelector('span.ytp-volume-area')) {
+            if (app.querySelector('div.ytp-right-controls')) {
                 observer.disconnect();
                 loadSettings();
             }
