@@ -42,6 +42,8 @@ document.addEventListener('_tap_quality', e => {
     const player = _tap_quality_app.querySelector('div#movie_player');
     if (player) {
         player.setPlaybackQualityRange(e.detail);
+
+        player.dispatchEvent(new MouseEvent('mouseout'));
     }
 });
 
