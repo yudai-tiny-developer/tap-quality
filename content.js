@@ -10,6 +10,7 @@ function main(app, common) {
     function update() {
         if (chahe) {
             create_buttons(chahe);
+            document.dispatchEvent(new CustomEvent('_tap_quality_loaded'));
         } else {
             loadSettings();
         }
@@ -19,7 +20,6 @@ function main(app, common) {
         chrome.storage.local.get(common.storage, data => {
             chahe = data;
             update();
-            document.dispatchEvent(new CustomEvent('_tap_quality_loaded'));
         });
     }
 
@@ -53,7 +53,6 @@ function main(app, common) {
         button.classList.add('_tap_quality_button', '_tap_quality_button_' + value, 'ytp-button');
         button.addEventListener('click', () => {
             document.dispatchEvent(new CustomEvent('_tap_quality', { detail: value }));
-            button.blur();
         });
         area.insertBefore(button, panel);
         return button;
