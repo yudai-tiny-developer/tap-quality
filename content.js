@@ -8,8 +8,8 @@ function main(app, common) {
     let cache;
 
     function update() {
-        if (chahe) {
-            create_buttons(chahe);
+        if (cache) {
+            create_buttons(cache);
             document.dispatchEvent(new CustomEvent('_tap_quality_loaded'));
         } else {
             loadSettings();
@@ -18,7 +18,7 @@ function main(app, common) {
 
     function loadSettings() {
         chrome.storage.local.get(common.storage, data => {
-            chahe = data;
+            cache = data;
             update();
         });
     }
