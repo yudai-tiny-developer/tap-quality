@@ -5,11 +5,9 @@ import(chrome.runtime.getURL('common.js')).then(common => {
 });
 
 function main(app, common) {
-    let cache;
-
-    function update() {
-        if (cache) {
-            create_buttons(cache);
+    function applySettings() {
+        if (settings) {
+            update_buttons(settings);
             document.dispatchEvent(new CustomEvent('_tap_quality_loaded'));
         } else {
             loadSettings();
@@ -18,12 +16,12 @@ function main(app, common) {
 
     function loadSettings() {
         chrome.storage.local.get(common.storage, data => {
-            cache = data;
-            update();
+            settings = data;
+            applySettings();
         });
     }
 
-    function create_buttons(data) {
+    function update_buttons(data) {
         const area = app.querySelector('div.ytp-right-controls');
         if (area) {
             let panel = area.querySelector('button.ytp-settings-button');
@@ -58,13 +56,14 @@ function main(app, common) {
         return button;
     }
 
+    let settings;
+    let observer;
+
     document.addEventListener('_tap_quality_init', e => {
-        new MutationObserver((mutations, observer) => {
-            if (app.querySelector('div.ytp-right-controls')) {
-                update();
-            }
-        }).observe(app, { childList: true, subtree: true });
         loadSettings();
+        observer?.disconnect();
+        observer = new MutationObserver(applySettings);
+        observer.observe(app, { childList: true, subtree: true });
     });
 
     chrome.storage.onChanged.addListener(() => {
