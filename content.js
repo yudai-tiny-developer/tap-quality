@@ -5,11 +5,9 @@ import(chrome.runtime.getURL('common.js')).then(common => {
 });
 
 function main(app, common) {
-    let cache;
-
-    function update() {
-        if (cache) {
-            create_buttons(cache);
+    function applySettings(force) {
+        if (settings) {
+            update_buttons(settings, force);
             document.dispatchEvent(new CustomEvent('_tap_quality_loaded'));
         } else {
             loadSettings();
@@ -18,14 +16,14 @@ function main(app, common) {
 
     function loadSettings() {
         chrome.storage.local.get(common.storage, data => {
-            cache = data;
-            update();
+            settings = data;
+            applySettings(true);
         });
     }
 
-    function create_buttons(data) {
+    function update_buttons(data, force) {
         const area = app.querySelector('div.ytp-right-controls');
-        if (area) {
+        if (area && (!area.querySelector('button._tap_quality_button') || force)) {
             let panel = area.querySelector('button.ytp-settings-button');
             panel = update_button(data.v8, common.default_v8, area, panel, 'auto', data.v8_enabled, common.default_v8_enabled);
             panel = update_button(data.v9, common.default_v9, area, panel, '2160p', data.v9_enabled, common.default_v9_enabled);
@@ -58,13 +56,14 @@ function main(app, common) {
         return button;
     }
 
+    let settings;
+    let observer;
+
     document.addEventListener('_tap_quality_init', e => {
-        new MutationObserver((mutations, observer) => {
-            if (app.querySelector('div.ytp-right-controls')) {
-                update();
-            }
-        }).observe(app, { childList: true, subtree: true });
         loadSettings();
+        observer?.disconnect();
+        observer = new MutationObserver(() => applySettings());
+        observer.observe(app, { childList: true, subtree: true });
     });
 
     chrome.storage.onChanged.addListener(() => {
