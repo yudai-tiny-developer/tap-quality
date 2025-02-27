@@ -55,5 +55,5 @@
                 document.dispatchEvent(new CustomEvent('_tap_quality_init'));
             }
         }
-    }, 1000);
+    }, 500);
 })();
