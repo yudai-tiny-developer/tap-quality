@@ -37,6 +37,7 @@ function main(app, common) {
     function create_button() {
         const button = document.createElement('button');
         button.style.display = 'none';
+        return button;
     }
 
     const shortcut_command = command => {
