@@ -124,7 +124,7 @@ function main(app, common) {
             area.insertBefore(button_v1, button_v2);
 
             loadSettings();
-        }, 200);
+        }, 1000);
     });
 
     const s = document.createElement('script');
