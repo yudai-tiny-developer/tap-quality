@@ -23,6 +23,10 @@
         }
     }
 
+    function onPlaybackQualityChange(e) {
+        activate(e, player.getPreferredQuality());
+    }
+
     const app = document.querySelector('ytd-app') ?? document.body; // YouTube.com or Embedded Player
 
     let player;
@@ -41,19 +45,20 @@
         }
     });
 
-    const detect_interval = setInterval(() => {
-        player = app.querySelector('div#movie_player');
-        if (player) {
-            area = player.querySelector('div.ytp-right-controls');
-            if (area) {
-                clearInterval(detect_interval);
-
-                player.addEventListener('onPlaybackQualityChange', e => {
-                    activate(e, player.getPreferredQuality());
-                });
-
-                document.dispatchEvent(new CustomEvent('_tap_quality_init'));
-            }
+    setInterval(() => {
+        const player_c = app.querySelector('div#movie_player');
+        if (!player_c || player_c === player) {
+            return;
         }
-    }, 500);
+        player = player_c;
+
+        area = player.querySelector('div.ytp-right-controls');
+        if (!area) {
+            return;
+        }
+
+        player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+
+        document.dispatchEvent(new CustomEvent('_tap_quality_init'));
+    }, 1000);
 })();
