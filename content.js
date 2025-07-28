@@ -29,14 +29,9 @@ function main(app, common) {
 
     function update_button(button, label, value, default_value, enabled, default_enabled) {
         const detail = common.value(value, default_value);
-        button.style.display = common.value(enabled, default_enabled) ? '' : 'none';
+        button.style.display = common.value(enabled, default_enabled) ? 'inline-flex' : 'none';
         button.classList.add('_tap_quality_button', '_tap_quality_button_' + detail, 'ytp-button');
-        if (new_style) {
-            button.innerHTML = `<svg width="75%" height="75%" viewBox="0 0 72 72"><text font-size="20" x="0%" y="45%">${label}</text></svg>`;
-
-        } else {
-            button.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 72 72"><text font-size="20" x="50%" y="50%" dominant-baseline="central" text-anchor="middle">${label}</text></svg>`;
-        }
+        button.innerHTML = `<span class="ytp-live">${label}</span>`;
         button.addEventListener('click', () => {
             document.dispatchEvent(new CustomEvent('_tap_quality', { detail: detail }));
         });
@@ -99,7 +94,6 @@ function main(app, common) {
     let settings;
     let area;
     let panel;
-    let new_style;
 
     chrome.runtime.onMessage.addListener(shortcut_command);
 
@@ -117,11 +111,7 @@ function main(app, common) {
                 area = player.querySelector('div.ytp-right-controls'); // old style
                 if (!area) {
                     return;
-                } else {
-                    new_style = false;
                 }
-            } else {
-                new_style = true;
             }
 
             panel = area.querySelector('button.ytp-settings-button');
