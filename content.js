@@ -94,13 +94,15 @@ function main(app, common) {
     let settings;
     let area;
     let panel;
+    let detect_interval;
 
     chrome.runtime.onMessage.addListener(shortcut_command);
 
     chrome.storage.onChanged.addListener(loadSettings);
 
     document.addEventListener('_tap_quality_init', () => {
-        const detect_interval = setInterval(() => {
+        clearInterval(detect_interval);
+        detect_interval = setInterval(() => {
             const player = app.querySelector('div#movie_player');
             if (!player) {
                 return;
