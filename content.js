@@ -31,7 +31,7 @@ function main(app, common) {
         const detail = common.value(value, default_value);
         button.style.display = common.value(enabled, default_enabled) ? 'inline-flex' : 'none';
         button.classList.add('_tap_quality_button', '_tap_quality_button_' + detail, 'ytp-button');
-        button.innerHTML = `<span class="ytp-live">${label}</span>`;
+        button.innerHTML = `<span class="ytp-live" translate="no">${label}</span>`;
         button.addEventListener('click', () => {
             document.dispatchEvent(new CustomEvent('_tap_quality', { detail: detail }));
         });
