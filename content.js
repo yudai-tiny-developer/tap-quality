@@ -1,10 +1,10 @@
 import(chrome.runtime.getURL('common.js')).then(common => {
     if (!common.isLiveChat(location.href)) {
-        main(document.querySelector('ytd-app') ?? document.body, common);
+        main(common);
     }
 });
 
-function main(app, common) {
+function main(common) {
     function loadSettings() {
         chrome.storage.local.get(common.storage, data => {
             settings = data;
@@ -103,7 +103,7 @@ function main(app, common) {
     document.addEventListener('_tap_quality_init', () => {
         clearInterval(detect_interval);
         detect_interval = setInterval(() => {
-            const player = app.querySelector('div#movie_player');
+            const player = document.getElementById("movie_player");
             if (!player) {
                 return;
             }
