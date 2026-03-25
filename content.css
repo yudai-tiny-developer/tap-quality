@@ -1,10 +1,14 @@
 button._tap_quality_button {
-    color: #eee !important;
-    justify-content: center !important;
-    align-items: center !important;
-    vertical-align: top !important;
+    color: #eee;
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
 }
 
 button._tap_quality_button._tap_quality_active {
-    color: #ff8983 !important;
+    color: #ff8983;
+}
+
+button._tap_quality_button_new_embedded_player {
+    margin: 0 8px;
 }
