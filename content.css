@@ -5,10 +5,21 @@ button._tap_quality_button {
     vertical-align: top;
 }
 
-button._tap_quality_button._tap_quality_active {
-    color: #ff8983;
+div#player-controls button._tap_quality_button {
+    margin: 0 8px;
 }
 
-button._tap_quality_button_new_embedded_player {
-    margin: 0 8px;
+div._tap_quality_button_container {
+    display: flex;
+    height: 40px;
+}
+
+div#player-controls div._tap_quality_button_container {
+    border-radius: 24px;
+    background: rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 2px #000;
+}
+
+button._tap_quality_button._tap_quality_active {
+    color: #ff8983;
 }
