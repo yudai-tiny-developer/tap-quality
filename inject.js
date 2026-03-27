@@ -26,33 +26,19 @@
     }
 
     let player;
-    let area;
 
-    document.addEventListener('_tap_quality_loaded', e => {
-        if (player) {
-            activate(player.getPlaybackQuality(), player.getPreferredQuality());
-        }
+    document.addEventListener('_tap_quality_loaded', () => {
+        activate(player.getPlaybackQuality(), player.getPreferredQuality());
     });
 
     document.addEventListener('_tap_quality', e => {
-        if (player) {
-            player.setPlaybackQualityRange(e.detail);
-            setTimeout(() => player.dispatchEvent(new MouseEvent('mouseout')), 500);
-        }
+        player.setPlaybackQualityRange(e.detail);
+        setTimeout(() => player.dispatchEvent(new MouseEvent('mouseout')), 500);
     });
 
     const detect_interval = setInterval(() => {
         player = document.getElementById("movie_player");
         if (!player) return;
-
-        const action_menu = document.getElementsByTagName('player-fullscreen-action-menu')?.[0];
-        if (action_menu) { // new-style YouTube embedded player
-            area = action_menu.querySelector('div.quick-actions-wrapper');
-            if (!area) return;
-        } else {
-            area = player.querySelector('div.ytp-right-controls');
-            if (!area) return;
-        }
 
         clearInterval(detect_interval);
 
